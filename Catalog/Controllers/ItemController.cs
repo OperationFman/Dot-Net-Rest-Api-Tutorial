@@ -17,5 +17,16 @@ namespace Catalog.Controllers {
             var items = repository.GetItems();
             return items;
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Item> GetItem(Guid id) { // Add ActionResult to allows us to return various status codes depending on errors
+            var item = repository.GetItem(id);
+
+            if (item is null) {
+                return NotFound(); // Returns 404 not found for us
+            }
+
+            return item;
+        }
     }
 }
