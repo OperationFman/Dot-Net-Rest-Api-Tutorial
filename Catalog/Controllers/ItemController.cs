@@ -1,4 +1,5 @@
 using Catalog.Dto;
+using Catalog.Dtos;
 using Catalog.Entities;
 using Catalog.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -13,21 +14,41 @@ namespace Catalog.Controllers {
             this.repository = repository;
         }
 
-        [HttpGet] // GET /items, will call this method
+        [HttpGet] // GET /items
         public IEnumerable<ItemDto> GetItems() {
             var items = repository.GetItems().Select(item => item.AsDto());
             return items;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] // GET /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
         public ActionResult<ItemDto> GetItem(Guid id) { // Add ActionResult to allows us to return various status codes depending on errors
             var item = repository.GetItem(id);
 
             if (item is null) {
-                return NotFound(); // Returns 404 not found for us
+                return NotFound(); // Returns "404 not found" for us
             }
 
             return item.AsDto();
+        }
+
+        [HttpPost] // POST
+        public ActionResult<ItemDto> CreateItem(CreateItemDto itemDto) {
+            Item item = new(){ 
+                Id = Guid.NewGuid(), // generate ID
+                Name = itemDto.Name, 
+                Price = itemDto.Price, 
+                CreatedDate = DateTimeOffset.UtcNow // generate Date
+            };
+
+            // Save the new resource
+            repository.CreateItem(item);
+
+            // It's convention to return the created resource
+            // CreatedAtAction adds "201 Created"
+            // nameof is just a title, we could add anything
+            // A new id is simply required, we may as well use the same one
+            // item.AsDto() is our response payload object of the created item, converted to Dto
+            return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
         }
     }
 }
