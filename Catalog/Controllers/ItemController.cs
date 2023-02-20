@@ -50,5 +50,37 @@ namespace Catalog.Controllers {
             // item.AsDto() is our response payload object of the created item, converted to Dto
             return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
         }
+
+        [HttpPut("{id}")] // PUT /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
+        public ActionResult UpdateItem(Guid id, UpdateItemDto itemDto) {
+            var existingItem = repository.GetItem(id);
+
+            if (existingItem is null) {
+                return NotFound();
+            }
+
+            // Since itemDto is a record we can use 'with' to update whatever values that we provide/override
+            Item updatedItem = existingItem with { 
+                Name = itemDto.Name,
+                Price = itemDto.Price
+            };
+
+            repository.UpdateItem(updatedItem);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")] // DELETE /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
+        public ActionResult DeleteItem(Guid id, UpdateItemDto itemDto) {
+            var existingItem = repository.GetItem(id);
+
+            if (existingItem is null) {
+                return NotFound();
+            }
+
+            repository.DeleteItem(id);
+
+            return NoContent();
+        }
     }
 }
