@@ -71,9 +71,10 @@ namespace Catalog.Controllers {
         }
 
         [HttpDelete("{id}")] // DELETE /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
-        public ActionResult DeleteItem(Guid id, UpdateItemDto itemDto) {
+        public ActionResult DeleteItem(Guid id) {           
             var existingItem = repository.GetItem(id);
 
+            
             if (existingItem is null) {
                 return NotFound();
             }

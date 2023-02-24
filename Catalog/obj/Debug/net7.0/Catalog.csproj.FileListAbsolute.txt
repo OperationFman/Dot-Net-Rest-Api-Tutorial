@@ -31,3 +31,16 @@
 /Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/obj/Debug/net7.0/Catalog.pdb
 /Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/obj/Debug/net7.0/Catalog.genruntimeconfig.cache
 /Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/obj/Debug/net7.0/ref/Catalog.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/AWSSDK.Core.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/AWSSDK.SecurityToken.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/DnsClient.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/MongoDB.Bson.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/MongoDB.Driver.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/MongoDB.Driver.Core.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/MongoDB.Libmongocrypt.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/SharpCompress.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/Snappier.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/ZstdSharp.dll
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/runtimes/linux/native/libmongocrypt.so
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/runtimes/osx/native/libmongocrypt.dylib
+/Users/franklinvmoon/Documents/GitHub/Dot-Net-Rest-Api-Tutorial/Catalog/bin/Debug/net7.0/runtimes/win/native/mongocrypt.dll
