@@ -15,14 +15,15 @@ namespace Catalog.Controllers {
         }
 
         [HttpGet] // GET /items
-        public IEnumerable<ItemDto> GetItems() {
-            var items = repository.GetItems().Select(item => item.AsDto());
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync() {
+            // Note the () around the await, this is because .Select can't run immediately on a promise
+            var items = (await repository.GetItemsAsync()).Select(item => item.AsDto());
             return items;
         }
 
         [HttpGet("{id}")] // GET /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
-        public ActionResult<ItemDto> GetItem(Guid id) { // Add ActionResult to allows us to return various status codes depending on errors
-            var item = repository.GetItem(id);
+        public async Task<ActionResult<ItemDto>> GetItemAsync(Guid id) { // Add ActionResult to allows us to return various status codes depending on errors
+            var item = await repository.GetItemAsync(id);
 
             if (item is null) {
                 return NotFound(); // Returns "404 not found" for us
@@ -32,7 +33,7 @@ namespace Catalog.Controllers {
         }
 
         [HttpPost] // POST
-        public ActionResult<ItemDto> CreateItem(CreateItemDto itemDto) {
+        public async Task<ActionResult<ItemDto>> Async(CreateItemDto itemDto) {
             Item item = new(){ 
                 Id = Guid.NewGuid(), // generate ID
                 Name = itemDto.Name, 
@@ -41,19 +42,19 @@ namespace Catalog.Controllers {
             };
 
             // Save the new resource
-            repository.CreateItem(item);
+            await repository.CreateItemAsync(item);
 
             // It's convention to return the created resource
             // CreatedAtAction adds "201 Created"
             // nameof is just a title, we could add anything
             // A new id is simply required, we may as well use the same one
             // item.AsDto() is our response payload object of the created item, converted to Dto
-            return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
+            return CreatedAtAction(nameof(GetItemAsync), new { id = item.Id}, item.AsDto());
         }
 
         [HttpPut("{id}")] // PUT /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
-        public ActionResult UpdateItem(Guid id, UpdateItemDto itemDto) {
-            var existingItem = repository.GetItem(id);
+        public async Task<ActionResult> UpdateItemAsync(Guid id, UpdateItemDto itemDto) {
+            var existingItem = await repository.GetItemAsync(id);
 
             if (existingItem is null) {
                 return NotFound();
@@ -65,21 +66,21 @@ namespace Catalog.Controllers {
                 Price = itemDto.Price
             };
 
-            repository.UpdateItem(updatedItem);
+            await repository.UpdateItemAsync(updatedItem);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")] // DELETE /items/3fa85f64-5717-4562-b3fc-2c963f66afa6
-        public ActionResult DeleteItem(Guid id) {           
-            var existingItem = repository.GetItem(id);
+        public async Task<ActionResult> DeleteItemAsync(Guid id) {           
+            var existingItem = await repository.GetItemAsync(id);
 
             
             if (existingItem is null) {
                 return NotFound();
             }
 
-            repository.DeleteItem(id);
+            await repository.DeleteItemAsync(id);
 
             return NoContent();
         }

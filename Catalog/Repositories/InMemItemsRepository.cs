@@ -12,29 +12,29 @@ namespace Catalog.Repositories
             new Item { Id = Guid.NewGuid(), Name = "Bronze Shield", Price = 18, CreatedDate = DateTimeOffset.UtcNow }
         };
 
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<Item> GetItemsAsync()
         { // We can call this from anywhere to get all our data
             return items;
         }
 
-        public Item? GetItem(Guid id)
+        public Item? GetItemAsync(Guid id)
         { // Use this anywhere to get an item via is Guid
             return items.Where(item => item.Id == id).SingleOrDefault();
             // SingleOrDefault() Returns the item or null
         }
 
-        public void CreateItem(Item item)
+        public void CreateItemAsync(Item item)
         {
             items.Add(item);
         }
 
-        public void UpdateItem(Item item)
+        public void UpdateItemAsync(Item item)
         {
             var index = items.FindIndex(existingItem => existingItem.Id == item.Id);
             items[index] = item;
         }
 
-        public void DeleteItem(Guid id)
+        public void DeleteItemAsync(Guid id)
         {
             var index = items.FindIndex(existingItem => existingItem.Id == id);
             items.RemoveAt(index);
